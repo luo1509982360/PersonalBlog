@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="_fragments :: header(~{::title})">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>友人帐——L-toYthe-Xの博客</title>
+</head>
+<body>
+<!--导航-->
+<nav th:replace="_fragments :: frontNavBar(6)"></nav>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<!--中间内容-->
+<div class="m-margin- animate__animated animate__fadeIn">
+    <div class="ui m-opacity container">
+        <div class="box-shadow-max">
+            <div class="ui segment m-padded-tb-large m-opacity">
+                <div class="ui container" style="font-family: 楷体">
+                    <div class="" style="font-size: 40px;font-weight: bold" align="center">友人入帐须知</div>
+                    <br>
+                    <ui class="list">
+                        <div class="m-margin-left-mini m-margin-tb-tiny" style="font-size: x-large;font-weight: bold">
+                            网站要求：
+                        </div>
+                        <br>
+                        <li class="m-margin-left-big m-margin-tb-tiny" style="font-size: large">
+                            无色情内容，无政治敏感内容，网站要能长期正常访问
+                        </li>
+                        <li class="m-margin-left-big m-margin-tb-tiny" style="font-size: large">
+                            至少需要一个月更新一次文章
+                        </li>
+                        <li class="m-margin-left-big m-margin-tb-tiny" style="font-size: large">
+                            需要交换友链，先把本站添加到你的网站中，再根据下面的申请格式通过社交软件、emial、留言板向我申请哦~
+                        </li>
+                        <br>
+                        <div class="m-margin-left-mini m-margin-tb-tiny" style="font-size: x-large;font-weight: bold">
+                            申请格式：
+                        </div>
+                        <br>
+                        <li class="m-margin-left-big m-margin-tb-tiny" style="font-size: large">
+                            网站标题：L-toYthe-X
+                        </li>
+                        <li class="m-margin-left-big m-margin-tb-tiny" style="font-size: large">
+                            网站地址：<a href="http://175.178.151.225:8080/" target="_blank">http://175.178.151.225:8080/</a>
+                        </li>
+                        <li class="m-margin-left-big m-margin-tb-tiny" style="font-size: large">
+                            图片地址：<a href="https://s1.ax1x.com/2022/05/26/XEHK0A.jpg" target="_blank">https://s1.ax1x.com/2022/05/26/XEHK0A.jpg</a>
+                        </li>
+                    </ui>
+                </div>
+            </div>
+        </div>
+
+        <!--友人帐区域-->
+        <div class="box-shadow-max">
+            <div class="ui top attached red m-opacity segment box-shadow-max">
+                <div class="ui m-padded-tb-large m-container-tiny">
+                    <div class="ui stackable m-container-mini grid">
+                        <!--友人帐显示区域-->
+                        <div class="m-margin-tb-tiny four wide column" th:each="blogroll : ${blogrolls}">
+                            <a th:href="@{${blogroll.blogUrl}}" class="m-class_outer" target="_blank">
+                                <div align="center">
+                                    <div class="m-blogroll">
+                                        <img th:src="@{${blogroll.blogImg}}"
+                                             alt="" class="m-blogroll-img">
+                                        <div class="m-margin-top-1">
+                                            <h4 class="m-blogroll-font m-margin-tb-tiny"
+                                                th:text="${blogroll.blogTitle}"></h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<!--底部footer-->
+<!--<footer th:replace="_fragments :: footer"></footer>-->
+<footer th:fragment="footer" class="ui inverted verticla segment m-padded-tb-massive">
+    <div class="ui center aligned container">
+        <div class="ui inverted divided stackable grid">
+            <div class="three wide column">
+                <h3 class="ui inverted header m-text-spaced m-opacity-mini">联系我</h3>
+                <div class="ui inverted link list">
+                    <div class="item">Email：1509982360@qq.com</div>
+                    <div class="item">QQ：1509982360</div>
+                </div>
+            </div>
+            <div class="five wide column">
+                <h3 class="ui inverted header m-text-spaced m-opacity-mini">最新博客</h3>
+                <div class="ui inverted link list">
+                    <a th:href="@{/blog/(id=${blog.id})}" target="_blank" class="item" th:each="blog : ${newBlogs}"
+                       th:text="${blog.title}">标题</a>
+                </div>
+            </div>
+            <div class="five wide column">
+                <h3 class="ui inverted header m-text-spaced m-opacity-mini">碎碎念</h3>
+                <p class="m-text-spaced m-opacity-mini">
+                    欢迎光临本站，这是我的个人博客，记录本人的学习笔记、编程心得、生活点滴，只要我想记录分享的内容都会在本站出现。
+                    在不断学习和成长的道路上，希望与诸君共勉
+                </p>
+            </div>
+            <div class="three wide column">
+                <h3 class="ui inverted header m-text-spaced m-opacity-mini">博客信息</h3>
+                <div class="ui inverted link list">
+                    <div class="item">博客总数：<span style="color: #ff7272; font-size: 20px">[[${blogCount}]]</span>&nbsp;篇
+                    </div>
+                    <div class="item">访问总数：<span style="color: #ff7272; font-size: 20px">[[${blogSumViews}]]</span>&nbsp;次
+                    </div>
+                    <div class="item">留言总数：<span style="color: #ff7272; font-size: 20px">[[${blogCommentCount}]]</span>&nbsp;条
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ui inverted section divider"></div>
+        <p class="m-text-spaced m-opacity-mini">
+            Copyright © 2022 L-toYthe-X Design By L-toYthe-X
+        </p>
+        <br>
+        <div style="color: #f160a2;margin-top: -18px" class="ui inverted m-text-spaced">
+            我的博客已营业：<span id="run_time" class="item"></span> （≧0≦）
+        </div>
+    </div>
+</footer>
+
+
+<script>
+    $(".menu.toggle").click(function () {
+        $(".m-item").toggleClass("m-mobile-hide")
+    });
+
+    // 运行时间统计
+    function runTime() {
+        var d = new Date(), str = '';
+        BirthDay = new Date("May 25,2022");
+        today = new Date();
+        timeold = (today.getTime() - BirthDay.getTime());
+        sectimeold = timeold / 1000
+        secondsold = Math.floor(sectimeold);
+        msPerDay = 24 * 60 * 60 * 1000
+        msPerYear = 365 * 24 * 60 * 60 * 1000
+        e_daysold = timeold / msPerDay
+        e_yearsold = timeold / msPerYear
+        daysold = Math.floor(e_daysold);
+        yearsold = Math.floor(e_yearsold);
+        //str = yearsold + "年";
+        str += daysold + "天";
+        str += d.getHours() + '时';
+        str += d.getMinutes() + '分';
+        str += d.getSeconds() + '秒';
+        return str;
+    }
+
+    setInterval(function () {
+        $('#run_time').html(runTime())
+    }, 1000);
+
+</script>
+</body>
+</html>

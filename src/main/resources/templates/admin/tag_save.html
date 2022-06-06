@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="_fragments :: header(~{::title})">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>标签新增</title>
+</head>
+<body>
+<!--导航-->
+<nav th:replace="_fragments :: adminNavBar(3)"></nav>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<!--中间内容-->
+<div class="m-container-blog m-padded-tb-2">
+    <div class="container">
+        <form th:action="@{/admin/saveTag}" method="post" class="ui form">
+            <div class="required field">
+                <div class="ui left labeled input">
+                    <label class="ui blue basic label">名称</label>
+                    <input type="text" name="name" placeholder="标签名称">
+                </div>
+            </div>
+
+            <div class="ui negative message" th:unless="${#strings.isEmpty(message)}" th:text="${message}"></div>
+            <div class="ui error message"></div>
+
+            <div class="ui right aligned container">
+                <button type="button" class="ui button" onclick="window.history.go(-1)">返回</button>
+                <button class="ui red submit button">新增</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    $(".menu.toggle").click(function () {
+        $(".m-item").toggleClass("m-mobile-hide")
+    });
+
+    $(".ui.dropdown").dropdown()
+
+    $(".ui.form").form({
+        fields: {
+            name: {
+                identifier: "name",
+                rules: [{
+                    type: "empty",
+                    prompt: "请输标签名称"
+                }]
+            }
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!--header-->
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="header(title)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:replace="${title}"></title>
+    <!--  jquery  -->
+    <script th:src="@{/lib/jquery/jquery-3.5.1.min.js}"></script>
+
+    <!--  Sematic-ui  -->
+    <link rel="stylesheet" th:href="@{/lib/semanticui/dist/semantic.min.css}">
+    <script th:src="@{/lib/semanticui/dist/semantic.min.js}"></script>
+
+    <!--页面动画-->
+    <link rel="stylesheet" th:href="@{/lib/animate/animate.min.css}"/>
+
+    <!--prism代码高亮-->
+    <link rel="stylesheet" th:href="@{/lib/prism/prism.css}">
+    <script th:src="@{/lib/prism/prism.js}"></script>
+
+    <!--tocbot文章目录生成-->
+    <link rel="stylesheet" th:href="@{/lib/tocbot/tocbot.css}">
+    <script th:src="@{/lib/tocbot/tocbot.min.js}"></script>
+
+    <!--中文页面排版-->
+    <link rel="stylesheet" th:href="@{/css/typo.css}">
+
+    <!--qrcode二维码生成-->
+    <script th:src="@{/lib/qrcode/qrcode.min.js}"></script>
+
+    <!--平滑滚动-->
+    <script th:src="@{/lib/scrollto/jquery.scrollTo.min.js}"></script>
+
+    <!--滚动监测-->
+    <script th:src="@{/lib/waypoints/jquery.waypoints.min.js}"></script>
+
+    <!--Markdown语法编辑器-->
+    <link rel="stylesheet" th:href="@{/lib/editormd/css/editormd.min.css}">
+    <script th:src="@{/lib/editormd/editormd.min.js}"></script>
+
+    <!--clickshow-->
+    <script th:src="@{/lib/clickshow/click_show_text.js}"></script>
+
+    <!--自定义-->
+    <link rel="stylesheet" th:href="@{/css/me.css}">
+</head>
+
+<!--前端导航-->
+<nav th:fragment="frontNavBar(n)"
+     class="navigation m-shadow animate__animated animate__fadeIn">
+    <div class="ui container">
+        <div class="ui inverted secondary stackable menu">
+            <h1 class="ui teal header item">L-toYthe-X</h1>
+            <a th:href="@{/}" class="m-item item m-mobile-hide" th:classappend="${n == 1} ? 'active'"><span><i
+                    class="home icon"></i>&nbsp;首页</span></a>
+            <a th:href="@{/showTypes}" class="m-item item m-mobile-hide"
+               th:classappend="${n == 2} ? 'active'"><span><i class="idea icon"></i>&nbsp;分类</span></a>
+            <a th:href="@{/showTags}" class="m-item item m-mobile-hide" th:classappend="${n == 3} ? 'active'"><span><i
+                    class="tags icon"></i>&nbsp;&nbsp;标签</span></a>
+            <a th:href="@{/showArchives}" class="m-item item m-mobile-hide"
+               th:classappend="${n == 4} ? 'active'"><span><i class="clone icon"></i>&nbsp;&nbsp;归档</span></a>
+            <a th:href="@{/showComments}" class="m-item item m-mobile-hide"
+               th:classappend="${n == 5} ? 'active'"><span><i class="comment alternate icon"></i>&nbsp;留言板</span></a>
+            <a th:href="@{/showBlogrolls}" class="m-item item m-mobile-hide"
+               th:classappend="${n == 6} ? 'active'"><span><i class="nintendo switch icon"></i>友人帐</span></a>
+            <a th:href="@{/aboutme}" class="m-item item m-mobile-hide"
+               th:classappend="${n == 7} ? 'active'"><span><i class="address card outline icon"></i>&nbsp;关于我</span></a>
+            <div class="m-item right item m-mobile-hide">
+                <form name="search" th:action="@{/search}" target="_blank">
+                    <div class="ui icon inverted transparent input">
+                        <input type="text" name="condition" placeholder="Search...." th:value="${condition}"
+                               style="width: 17em">
+                        <i onclick="document.forms['search'].submit();" class="search link icon"></i>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <a href="#" class="ui menu toggle black icon button m-top-right m-pc-hide">
+        <i class="sidebar icon"></i>
+    </a>
+
+    <!--live2d 看板娘-->
+    <link rel="stylesheet" th:href="@{/lib/live2d/waifu.css}">
+    <script th:src="@{/lib/live2d/waifu-tips.js}"></script>
+    <script th:src="@{/lib/live2d/autoload.js}"></script>
+</nav>
+
+<!--后台导航-->
+<nav th:fragment="adminNavBar(n)"
+     class="ui inverted attached segment m-padded-tb-mini m-shadow animate__animated animate__fadeIn">
+    <div class="ui container">
+        <div class="ui inverted secondary stackable menu">
+            <h1 class="ui teal header item">管理后台</h1>
+            <a th:href="@{/admin/blogs}" class="m-item item m-mobile-hide"
+               th:classappend="${n == 1} ? 'active'"><span><i class="book icon"></i>&nbsp;博客</span></a>
+            <a th:href="@{/admin/types}" class="m-item item m-mobile-hide"
+               th:classappend="${n == 2} ? 'active'"><span><i class="idea icon"></i>&nbsp;分类</span></a>
+            <a th:href="@{/admin/tags}" class="m-item item m-mobile-hide" th:classappend="${n == 3} ? 'active'"><span><i
+                    class="tags icon"></i>&nbsp;&nbsp;标签</span></a>
+            <a th:href="@{/admin/listComment}" class="m-item item m-mobile-hide"
+               th:classappend="${n == 4} ? 'active'"><span><i
+                    class="comment alternate icon"></i>&nbsp;留言</span></a>
+            <a th:href="@{/admin/blogrolls}" class="m-item item m-mobile-hide"
+               th:classappend="${n == 5} ? 'active'"><span><i
+                    class="nintendo switch icon"></i>友人帐</span></a>
+            <div class="m-item right menu m-mobile-hide">
+                <div class="ui dropdown item">
+                    <div class="text">
+                        <img th:src="@{${session.user.avatar}}" alt="" class="ui avatar image">
+                        <span th:text="${session.user.nickname}"></span>
+                    </div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a th:href="@{/}" class="item">返回主页</a>
+                        <a th:href="@{/admin/logout}" class="item">注销</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="#" class="ui menu toggle black icon button m-top-right m-pc-hide">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+
+<!--footer-->
+<footer th:fragment="footer" class="ui inverted verticla segment m-padded-tb-massive">
+    <div class="ui center aligned container">
+        <div class="ui inverted divided stackable grid">
+            <div class="three wide column">
+                <h3 class="ui inverted header m-text-spaced m-opacity-mini">联系我</h3>
+                <div class="ui inverted link list">
+                    <div class="item">Email：1509982360@qq.com</div>
+                    <div class="item">QQ：1509982360</div>
+                </div>
+            </div>
+            <div class="five wide column">
+                <h3 class="ui inverted header m-text-spaced m-opacity-mini">最新博客</h3>
+                <div class="ui inverted link list">
+                    <a th:href="@{/blog/(id=${blog.id})}" target="_blank" class="item" th:each="blog : ${newBlogs}"
+                       th:text="${blog.title}">标题</a>
+                </div>
+            </div>
+            <div class="five wide column">
+                <h3 class="ui inverted header m-text-spaced m-opacity-mini">碎碎念</h3>
+                <p class="m-text-spaced m-opacity-mini">
+                    欢迎光临本站，这是我的个人博客，记录本人的学习笔记、编程心得、生活点滴，只要我想记录分享的内容都会在本站出现。
+                    在不断学习和成长的道路上，希望与诸君共勉
+                </p>
+            </div>
+            <div class="three wide column">
+                <h3 class="ui inverted header m-text-spaced m-opacity-mini">博客信息</h3>
+                <div class="ui inverted link list">
+                    <div class="item">博客总数：[[${blogCount}]]</div>
+                    <div class="item">访问总数：[[${blogSumViews}]]</div>
+                    <div class="item">留言总数：[[${blogCommentCount}]]</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ui inverted section divider">
+        </div>
+        <p class="m-text-spaced m-opacity-mini">
+            Copyright © 2022 L-to-the-X Design By LYX
+        </p>
+    </div>
+</footer>

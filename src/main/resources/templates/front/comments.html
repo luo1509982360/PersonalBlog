@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="_fragments :: header(~{::title})">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>留言板——L-toYthe-Xの博客</title>
+</head>
+<body>
+<!--导航-->
+<nav th:replace="_fragments :: frontNavBar(5)"></nav>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<!--中间内容-->
+<div class="m-container-blog m-padded-tb-2">
+    <div class="ui container">
+        <h1 style="text-align: center; color: pink; font-size: 45px; font-family: 楷体">留言板</h1>
+        <div class="ui bottom attached segment">
+            <form id="comment-form" th:action="@{/saveComment}" method="post" class="ui form">
+                <input type="hidden" name="blog.id" value="-1">
+                <input type="hidden" name="parentComment.id" value="-1">
+                <div class="field">
+                    <textarea name="content" placeholder="请输入留言内容..." id="" cols="30" rows="10"></textarea>
+                </div>
+                <div class="fields">
+                    <div class="field m-mobile-wide m-mobile-margin-bottom">
+                        <div class="ui left icon input">
+                            <i class="user icon"></i>
+                            <input type="text" name="nickname" placeholder="昵称">
+                        </div>
+                    </div>
+                    <div class="field m-mobile-wide m-mobile-margin-bottom">
+                        <div class="ui left icon input">
+                            <i class="mail icon"></i>
+                            <input type="text" name="email" placeholder="邮箱">
+                        </div>
+                    </div>
+                    <div class="field m-mobile-wide m-mobile-margin-bottom">
+                        <input type="submit" id="comment-submit" class="ui blue button m-mobile-wide" value="留言">
+                    </div>
+                </div>
+            </form>
+            <!--留言区域列表-->
+            <div id="comment-container" class="ui blue segment">
+                <div>
+                    <div class="ui threaded comments" style="max-width: 100%">
+                        <h3 class="ui dividing header">留言</h3>
+                        <div class="comment" th:each="comment : ${page.list}">
+                            <a class="avatar">
+                                <img th:src="@{${comment.avatar}}"
+                                     style="width: 40px !important; height: 40px !important">
+                            </a>
+                            <div class="content">
+                                <a class="author" th:text="${comment.nickname}"></a>
+                                <div class="metadata">
+                                    <span class="date" th:text="${comment.createDateStr}"></span>
+                                </div>
+                                <div class="text" th:text="${comment.content}"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+                <HR align=center width=780 color=#000000 SIZE=3>
+                <br>
+
+                <div class="ui bottom">
+                    <div class="ui middle aligned three column grid">
+                        <div class="column">
+                            <a th:href="@{/showCommentsPage/(pn=${page.pageNum}-1)}" class="ui mini blue basic button">上一页</a>
+                        </div>
+                        <div class="center aligned column" style="font-size: 17px; color: #ff8594">
+                            [[${page.pageNum}]]&nbsp;/&nbsp;[[${page.pages}]]
+                        </div>
+                        <div class="right aligned column">
+                            <a th:href="@{/showCommentsPage/(pn=${page.pageNum}+1)}" class="ui mini blue basic button">下一页</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<!--底部footer-->
+<!--<footer th:replace="_fragments :: footer"></footer>-->
+<footer th:fragment="footer" class="ui inverted verticla segment m-padded-tb-massive">
+    <div class="ui center aligned container">
+        <div class="ui inverted divided stackable grid">
+            <div class="three wide column">
+                <h3 class="ui inverted header m-text-spaced m-opacity-mini">联系我</h3>
+                <div class="ui inverted link list">
+                    <div class="item">Email：1509982360@qq.com</div>
+                    <div class="item">QQ：1509982360</div>
+                </div>
+            </div>
+            <div class="five wide column">
+                <h3 class="ui inverted header m-text-spaced m-opacity-mini">最新博客</h3>
+                <div class="ui inverted link list">
+                    <a th:href="@{/blog/(id=${blog.id})}" target="_blank" class="item" th:each="blog : ${newBlogs}"
+                       th:text="${blog.title}">标题</a>
+                </div>
+            </div>
+            <div class="five wide column">
+                <h3 class="ui inverted header m-text-spaced m-opacity-mini">碎碎念</h3>
+                <p class="m-text-spaced m-opacity-mini">
+                    欢迎光临本站，这是我的个人博客，记录本人的学习笔记、编程心得、生活点滴，只要我想记录分享的内容都会在本站出现。
+                    在不断学习和成长的道路上，希望与诸君共勉
+                </p>
+            </div>
+            <div class="three wide column">
+                <h3 class="ui inverted header m-text-spaced m-opacity-mini">博客信息</h3>
+                <div class="ui inverted link list">
+                    <div class="item">博客总数：<span style="color: #ff7272; font-size: 20px">[[${blogCount}]]</span>&nbsp;篇
+                    </div>
+                    <div class="item">访问总数：<span style="color: #ff7272; font-size: 20px">[[${blogSumViews}]]</span>&nbsp;次
+                    </div>
+                    <div class="item">留言总数：<span style="color: #ff7272; font-size: 20px">[[${blogCommentCount}]]</span>&nbsp;条
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ui inverted section divider"></div>
+        <p class="m-text-spaced m-opacity-mini">
+            Copyright © 2022 L-toYthe-X Design By L-toYthe-X
+        </p>
+        <br>
+        <div style="color: #f160a2;margin-top: -18px" class="ui inverted m-text-spaced">
+            我的博客已营业：<span id="run_time" class="item"></span> （≧0≦）
+        </div>
+    </div>
+</footer>
+
+<script>
+    $(".menu.toggle").click(function () {
+        $(".m-item").toggleClass("m-mobile-hide")
+    });
+
+    // 运行时间统计
+    function runTime() {
+        var d = new Date(), str = '';
+        BirthDay = new Date("May 25,2022");
+        today = new Date();
+        timeold = (today.getTime() - BirthDay.getTime());
+        sectimeold = timeold / 1000
+        secondsold = Math.floor(sectimeold);
+        msPerDay = 24 * 60 * 60 * 1000
+        msPerYear = 365 * 24 * 60 * 60 * 1000
+        e_daysold = timeold / msPerDay
+        e_yearsold = timeold / msPerYear
+        daysold = Math.floor(e_daysold);
+        yearsold = Math.floor(e_yearsold);
+        //str = yearsold + "年";
+        str += daysold + "天";
+        str += d.getHours() + '时';
+        str += d.getMinutes() + '分';
+        str += d.getSeconds() + '秒';
+        return str;
+    }
+
+    setInterval(function () {
+        $('#run_time').html(runTime())
+    }, 1000);
+
+    $(".ui.form").form({
+        fields: {
+            content: {
+                identifier: "content",
+                rules: [{
+                    type: "empty",
+                    prompt: "请输入留言内容"
+                }]
+            },
+            nickname: {
+                identifier: "nickname",
+                rules: [{
+                    type: "empty",
+                    prompt: "请输入你的昵称"
+                }]
+            },
+            email: {
+                identifier: "email",
+                rules: [{
+                    type: "empty",
+                    prompt: "请输入你的邮箱"
+                }]
+            },
+        }
+    })
+
+    // 留言提交
+    $("#comment-submit").click(function () {
+        var bool = $(".ui.form").form("validate form")
+        if (bool) {
+            console.log("校验成功")
+            // $(window).scrollTo($('#comment-container'), 500);
+            // clearContent();
+        } else {
+            console.log("校验失败")
+        }
+    })
+
+    // function postData() {
+    //     console.log("进来了")
+    //     $("#comment-container").load(/*[[@{/saveComment}]]*/"", {
+    //         "parentComment.id": $("[name='parentComment.id']").val(),
+    //         "blog.id": $("[name='blog.id']").val(),
+    //         "nickname": $("[name='nickname']").val(),
+    //         "email": $("[name='email']").val(),
+    //         "content": $("[name='content']").val()
+    //     }, function (responseTxt, statusTxt, xhr) {
+    //         $(window).scrollTo($('#comment-container'), 500);
+    //         clearContent();
+    //     });
+    // }
+
+    // 清空留言区域
+    function clearContent() {
+        $("[name='content']").val('');
+        $("[name='parentComment.id']").val(-1);
+        $("[name='content']").attr("placeholder", "请输入留言信息...");
+    }
+</script>
+</body>
+</html>

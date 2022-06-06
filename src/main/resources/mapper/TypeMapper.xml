@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyx.dao.TypeMapper">
+    <insert id="saveType">
+        insert into t_type
+        values (null, #{name})
+    </insert>
+
+    <update id="updateType">
+        update t_type
+        set name = #{name}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteType">
+        delete
+        from t_type
+        where id = #{id}
+    </delete>
+
+    <select id="getType" resultType="com.lyx.bean.Type">
+        select *
+        from t_type
+        where id = #{id}
+    </select>
+
+    <select id="listType" resultType="com.lyx.bean.Type">
+        select *
+        from t_type
+    </select>
+
+    <select id="getTypeByName" resultType="com.lyx.bean.Type">
+        select *
+        from t_type
+        where name = #{name}
+    </select>
+
+    <select id="listTypeByGroupAndOrder" resultType="com.lyx.bean.dto.TypeByGroupAndOrder">
+        select t.*, count(*) 'count'
+        from t_blog b
+                 join t_type t
+                      on b.type_id = t.id
+        where b.published = 1
+        group by type_id
+        order by count desc
+            limit #{limit}
+    </select>
+
+    <select id="listAllTypeByGroupAndOrder" resultType="com.lyx.bean.dto.TypeByGroupAndOrder">
+        select t.*, count(*) 'count'
+        from t_blog b
+                 join t_type t
+                      on b.type_id = t.id
+        where b.published = 1
+        group by type_id
+        order by count desc
+    </select>
+
+</mapper>

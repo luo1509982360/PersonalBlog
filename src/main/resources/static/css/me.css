@@ -1,0 +1,333 @@
+.m-padded-tb-mini {
+    padding-top: 0.5em !important;
+    padding-bottom: 0.5em !important;
+}
+
+body {
+    background: url("../img/Dusk.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100%;
+}
+
+/*index*/
+.navigation {
+    width: 100%;
+    min-height: 60px;
+    opacity: 0.6 !important;
+    position: fixed;
+    background-color: rgba(0,0,0,1);
+    z-index: 11002;
+    top: 0;
+    left: 0;
+    border-bottom: 1px solid #615e5e;
+    font-size: 15px;
+}
+
+.m-bg-class_outer {
+    display: block;
+    /*width: 550px;*/
+    /*height: 276px;*/
+    /*margin: 10px auto 0 0;*/
+    position: relative;
+    overflow: hidden;
+}
+
+.m-bg{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.m-bg-class_cover {
+    width: 100%;
+    height: 750px;
+    line-height: 50px;
+    padding-left: 6px;
+    /*background-color: rgba(0, 0, 0, .60);*/
+    /*color: #FFFFFF;*/
+    /*font-size: 26px;*/
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+}
+
+.m-margin-top-maxx {
+    margin-top: 5em !important;
+}
+
+.m-font-size-text{
+    font-size: 30px;
+    color: #000000;
+    color: #fc1e1e;
+    /*font-family: STXihei;*/
+}
+
+/*index*/
+
+/*blogrool*/
+
+.m-margin-{
+    margin-top:-4em !important;
+}
+
+.m-opacity {
+    opacity: 0.9 !important;
+}
+
+.box-shadow-max{
+    margin-bottom: 15px;
+    border-radius: 2px;
+    background-color: #fff;
+    box-shadow: 3px 3px 3px 0 rgba(0, 0, 0, .05);
+    -webkit-box-shadow: #000000 0px 0px 10px;
+    -moz-box-shadow: #000000 0px 0px 10px;
+}
+
+.m-padded-tb-large {
+    padding-top: 2em !important;
+    padding-bottom: 2em !important;
+}
+
+.m-margin-left-mini{
+    margin-left:4em !important;
+}
+
+.m-margin-tb-tiny {
+    margin-top: 0.3em !important;
+    margin-bottom: 0.3em !important;
+}
+
+.m-margin-left-big{
+    margin-left:8em !important;
+}
+
+.m-class_outer {
+    display: block;
+    /*width: 550px;*/
+    /*height: 276px;*/
+    margin: 10px auto 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.m-blogroll{
+    width: 160px;
+    height: 235px;
+    border: 1px solid #999;
+    box-shadow: 5px 5px 5px #999;
+    border-radius:8px;
+}
+
+.m-blogroll-img{
+    width: 160px;
+    height: 170px;
+    border-radius: 8px 8px 0px 0px;
+}
+
+.m-blogroll-font{
+    font-size: 16px;
+    color: #000000;
+    font-family: STSong;
+}
+
+.m-container-tiny {
+    max-width: 65em !important;
+    margin: auto !important;
+}
+
+.m-container-mini{
+    max-width: 100em !important;
+    margin: auto !important;
+}
+/*blogrool*/
+
+.m-padded-left {
+    padding-left: 1.4em !important;
+}
+
+.m-padded-mini-05 {
+    padding: 0.5em !important;
+}
+
+.m-padded-mini {
+    padding: 0.3em !important;
+}
+
+.m-padded {
+    padding: 1em !important;
+}
+
+.m-padded-top {
+    padding-top: 0.5em !important;
+}
+
+.m-padded-tb-1 {
+    padding-top: 1em !important;
+    padding-bottom: 1em !important;
+}
+
+.m-padded-tb-2 {
+    padding-top: 2em !important;
+    padding-bottom: 2em !important;
+}
+
+.m-padded-tb-1_5 {
+    padding-top: 1.5em !important;
+    padding-bottom: 1.5em !important;
+}
+
+.m-padded-rl-1 {
+    padding-right: 1em !important;
+    padding-left: 1em !important;
+}
+
+.m-padded-tb-3 {
+    padding-top: 3em !important;
+    padding-bottom: 3em !important;
+}
+
+.m-padded-tb-4 {
+    padding-top: 4em !important;
+    padding-bottom: 4em !important;
+}
+
+.m-padded-tb-5 {
+    padding-top: 5em !important;
+    padding-bottom: 5em !important;
+}
+
+.m-padded-tb-massive {
+    padding-top: 7em !important;
+    padding-bottom: 7em !important;
+}
+
+.m-margin {
+    margin-top: 0.3em !important;
+    margin-bottom: 0.3em !important;
+}
+
+.m-margin-top {
+    margin-top: 2em !important;
+}
+
+.m-margin-top-1 {
+    margin-top: 1em !important;
+}
+
+/*text*/
+.m-black {
+    color: #000000 !important;
+}
+
+.m-text {
+    font-weight: 200 !important;
+    letter-spacing: 1px !important;
+    line-height: 1.7 !important;
+}
+
+.m-text-about {
+    letter-spacing: 1px !important;
+    line-height: 1.7 !important;
+}
+
+.m-text-thin {
+    font-weight: 300 !important;
+}
+
+.m-text-spaced {
+    letter-spacing: 1px !important;
+}
+
+.m-text-lined {
+    line-height: 1.8 !important;
+}
+
+.m-opacity-mini {
+    opacity: 0.7 !important;
+}
+
+.m-padded-lr {
+    padding-left: 4em !important;
+    padding-right: 4em !important;
+}
+
+/*display*/
+
+.m-inline-block {
+    display: inline-block !important;
+}
+
+.m-container {
+    max-width: 72em !important;
+    margin: auto !important;
+}
+
+.m-container-blog {
+    max-width: 60em !important;
+    margin: auto !important;
+}
+
+.m-shadow {
+    -webkit-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+/*img*/
+.m-img {
+    width: 170px;
+    height: 100px;
+}
+
+.m-img-max {
+    width: 700px;
+    height: 600px;
+}
+
+/*locate*/
+.m-top-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.m-top {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    z-index: 1;
+}
+
+.m-fixed {
+    position: fixed !important;
+    z-index: 1 !important;
+}
+
+.m-right-bottom {
+    bottom: 0 !important;
+    right: 0 !important;
+}
+
+
+/*mobile*/
+.m-pc-hide {
+    display: none !important;
+}
+
+@media screen and (max-width: 768px) {
+    .m-mobile-hide {
+        display: none !important;
+    }
+
+    .m-pc-hide {
+        display: block !important;
+    }
+
+    .m-mobile-wide {
+        width: 100% !important;
+    }
+
+    .m-mobile-margin-bottom {
+        margin-bottom: 0.5em !important;
+    }
+}

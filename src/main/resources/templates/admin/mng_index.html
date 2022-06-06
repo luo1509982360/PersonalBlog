@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="_fragments :: header(~{::title})">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>欢迎</title>
+</head>
+<body>
+<!--导航-->
+<nav th:replace="_fragments :: adminNavBar(0)"></nav>
+
+<br>
+<br>
+
+<!--中间内容-->
+<div class="m-container-blog m-padded-tb-2">
+    <div class="container">
+        <div class="ui success large message">
+            <h2>Hi,</h2>
+            <P>[[${session.user.nickname}]]，欢迎登录</P>
+        </div>
+
+        <img th:src="@{/img/樱岛麻衣.jpg}" alt="" class="ui rounded bordered fluid image">
+    </div>
+</div>
+
+<script>
+    $(".menu.toggle").click(function () {
+        $(".m-item").toggleClass("m-mobile-hide")
+    });
+
+    $(".ui.dropdown").dropdown()
+</script>
+</body>
+</html>

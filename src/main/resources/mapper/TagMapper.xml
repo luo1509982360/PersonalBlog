@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyx.dao.TagMapper">
+    <insert id="saveTag">
+        insert into t_tag
+        values (null, #{name})
+    </insert>
+
+    <update id="updateTag">
+        update t_tag
+        set name = #{name}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTag">
+        delete
+        from t_tag
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteTagAndBlog">
+        delete
+        from t_blog_tag
+        where tag_id = #{id}
+    </delete>
+
+    <select id="getTag" resultType="com.lyx.bean.Tag">
+        select *
+        from t_tag
+        where id = #{id}
+    </select>
+
+    <select id="listTag" resultType="com.lyx.bean.Tag">
+        select *
+        from t_tag
+    </select>
+
+    <select id="getTagByName" resultType="com.lyx.bean.Tag">
+        select *
+        from t_tag
+        where name = #{name}
+    </select>
+
+    <select id="listTagByIds" resultType="com.lyx.bean.Tag">
+        select *
+        from t_tag
+        where id in (${ids})
+    </select>
+
+    <select id="listTagByGroupAndOrder" resultType="com.lyx.bean.dto.TagByGroupAndOrder">
+        select t.*, count(*) count
+        from t_tag t
+            join t_blog_tag bt
+        on t.id = bt.tag_id
+            join t_blog b
+            on b.id = bt.blog_id
+        where b.published = 1
+        group by t.id
+        order by count desc
+            limit #{limit}
+    </select>
+
+    <select id="listTagAllByGroupAndOrder" resultType="com.lyx.bean.dto.TagByGroupAndOrder">
+        select t.*, count(*) count
+        from t_tag t
+            join t_blog_tag bt
+        on t.id = bt.tag_id
+            join t_blog b
+            on b.id = bt.blog_id
+        where b.published = 1
+        group by t.id
+        order by count desc
+    </select>
+
+</mapper>

@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyx.dao.BlogMapper">
+    <insert id="saveBlog">
+        insert into t_blog
+        values (null, #{title}, #{description}, #{content}, #{coverPicture}, #{flag}, #{views},
+                #{appreciationEnable}, #{shareStatementEnable}, #{commentEnable}, #{published},
+                #{recommendEnable}, #{createDate}, #{updateDate}, #{type.id}, #{user.id})
+    </insert>
+
+    <insert id="saveBlogAndTag">
+        insert into t_blog_tag
+        values (null, #{blogId}, #{tagId})
+    </insert>
+
+    <update id="updateBlog">
+        update t_blog
+        set title                 = #{title},
+            description           = #{description},
+            content               = #{content},
+            cover_picture         = #{coverPicture},
+            flag                  = #{flag},
+            appreciation_enable   = #{appreciationEnable},
+            shareStatement_enable = #{shareStatementEnable},
+            comment_enable        = #{commentEnable},
+            published             = #{published},
+            recommend_enable      = #{recommendEnable},
+            update_date           = #{updateDate},
+            type_id               = #{type.id}
+        where id = #{id}
+    </update>
+
+    <update id="updateBlogAndTag">
+        update t_blog_tag
+        set tag_id = #{tagId}
+        where blog_id = #{blogId}
+          and tag_id = #{tagId}
+    </update>
+    <update id="updateBlogViews">
+        update t_blog
+        set views = views + 1
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBlog">
+        delete
+        from t_blog
+        where id = #{id}
+    </delete>
+    <delete id="deleteBlogAndTag">
+        delete
+        from t_blog_tag
+        where blog_id = #{id}
+    </delete>
+    <delete id="deleteBlogAndTagByIds">
+        delete
+        from t_blog_tag
+        where blog_id = #{id}
+          and tag_id in (${ids})
+    </delete>
+
+    <resultMap id="blogMap" type="com.lyx.bean.Blog">
+        <id property="id" column="id"></id>
+        <result property="title" column="title"></result>
+        <result property="description" column="description"></result>
+        <result property="content" column="content"></result>
+        <result property="coverPicture" column="cover_picture"></result>
+        <result property="flag" column="flag"></result>
+        <result property="views" column="views"></result>
+        <result property="appreciationEnable" column="appreciation_enable"></result>
+        <result property="shareStatementEnable" column="shareStatement_enable"></result>
+        <result property="commentEnable" column="comment_enable"></result>
+        <result property="published" column="published"></result>
+        <result property="recommendEnable" column="recommend_enable"></result>
+        <result property="createDate" column="create_date"></result>
+        <result property="updateDate" column="update_date"></result>
+        <result property="published" column="published"></result>
+        <association property="type" javaType="com.lyx.bean.Type">
+            <id property="id" column="typeId"></id>
+            <result property="name" column="typeName"></result>
+        </association>
+        <association property="user" javaType="com.lyx.bean.User">
+            <id property="id" column="user_id"></id>
+            <result property="nickname" column="nickname"></result>
+            <result property="avatar" column="avatar"></result>
+        </association>
+        <collection property="tags" ofType="com.lyx.bean.Tag">
+            <id property="id" column="tagId"></id>
+            <result property="name" column="tagName"></result>
+        </collection>
+    </resultMap>
+
+    <select id="getBlog" resultMap="blogMap">
+        select blog.*, tp.id typeId, tp.name typeName, u.nickname, u.avatar, tag.id tagId, tag.name tagName
+        from t_blog blog
+                 join t_type tp
+                      on blog.type_id = tp.id
+                 join t_user u
+                      on blog.user_id = u.id
+                 join t_blog_tag
+                 join t_tag tag
+                      on blog.id = t_blog_tag.blog_id and t_blog_tag.tag_id = tag.id
+        where blog.id = #{id}
+    </select>
+
+    <select id="listBlog" resultMap="blogMap">
+        select blog.*, tp.id typeId, tp.name typeName, tag.id tagId, tag.name tagName
+        from t_blog blog
+                 join t_type tp
+                      on blog.type_id = tp.id
+                 join t_blog_tag
+                 join t_tag tag
+                      on blog.id = t_blog_tag.blog_id and t_blog_tag.tag_id = tag.id
+    </select>
+
+    <select id="getBlogByTitle" resultType="com.lyx.bean.Blog">
+        select *
+        from t_blog
+        where title = #{title}
+    </select>
+
+    <resultMap id="blogMapByPage" type="com.lyx.bean.Blog">
+        <id property="id" column="id"></id>
+        <result property="title" column="title"></result>
+        <result property="description" column="description"></result>
+        <result property="content" column="content"></result>
+        <result property="coverPicture" column="cover_picture"></result>
+        <result property="flag" column="flag"></result>
+        <result property="views" column="views"></result>
+        <result property="appreciationEnable" column="appreciation_enable"></result>
+        <result property="shareStatementEnable" column="shareStatement_enable"></result>
+        <result property="commentEnable" column="comment_enable"></result>
+        <result property="published" column="published"></result>
+        <result property="recommendEnable" column="recommend_enable"></result>
+        <result property="createDate" column="create_date"></result>
+        <result property="updateDate" column="update_date"></result>
+        <result property="published" column="published"></result>
+        <association property="type" javaType="com.lyx.bean.Type">
+            <id property="id" column="id"></id>
+            <result property="name" column="name"></result>
+        </association>
+        <association property="user" javaType="com.lyx.bean.User">
+            <id property="id" column="user_id"></id>
+            <result property="nickname" column="nickname"></result>
+            <result property="avatar" column="avatar"></result>
+        </association>
+    </resultMap>
+
+    <select id="listBlogByPage" resultMap="blogMapByPage">
+        select *
+        from t_blog b
+                 join t_type t on b.type_id = t.id
+                 join t_user u on b.user_id = u.id
+    </select>
+
+    <select id="listBlogByFrontPage" resultMap="blogMapByPage">
+        select *
+        from t_blog b
+                 join t_type t on b.type_id = t.id
+                 join t_user u on b.user_id = u.id
+        where b.published = 1
+    </select>
+
+    <select id="listBlogByOrder" resultType="com.lyx.bean.dto.BlogByOrder">
+        select b.id, b.title
+        from t_blog b
+        where b.published = 1
+        ORDER BY b.create_date desc
+            limit #{limit}
+    </select>
+
+    <resultMap id="blogMapBySearch" type="com.lyx.bean.Blog">
+        <id property="id" column="id"></id>
+        <result property="title" column="title"></result>
+        <result property="description" column="description"></result>
+        <result property="content" column="content"></result>
+        <result property="coverPicture" column="cover_picture"></result>
+        <result property="flag" column="flag"></result>
+        <result property="views" column="views"></result>
+        <result property="appreciationEnable" column="appreciation_enable"></result>
+        <result property="shareStatementEnable" column="shareStatement_enable"></result>
+        <result property="commentEnable" column="comment_enable"></result>
+        <result property="published" column="published"></result>
+        <result property="recommendEnable" column="recommend_enable"></result>
+        <result property="createDate" column="create_date"></result>
+        <result property="updateDate" column="update_date"></result>
+        <result property="published" column="published"></result>
+        <association property="type" javaType="com.lyx.bean.Type">
+            <result property="name" column="name"></result>
+        </association>
+        <association property="user" javaType="com.lyx.bean.User">
+            <result property="nickname" column="nickname"></result>
+            <result property="avatar" column="avatar"></result>
+        </association>
+    </resultMap>
+
+    <select id="listBlogBySearch" resultMap="blogMapBySearch">
+        select b.*, t.`name`, u.nickname, u.avatar
+        from t_blog b
+                 join t_type t on b.type_id = t.id
+                 join t_user u on b.user_id = u.id
+        where b.published = 1
+          and (b.title like "%"#{condition}"%"
+          or b.description like "%"#{condition}"%"
+            or b.content like "%" #{condition}"%")
+    </select>
+
+    <select id="listBlogByTypeId" resultMap="blogMapBySearch">
+        select b.*, t.`name`, u.nickname, u.avatar
+        from t_blog b
+                 join t_type t on b.type_id = t.id
+                 join t_user u on b.user_id = u.id
+        where b.published = 1
+          and b.type_id = #{typeId}
+    </select>
+
+    <resultMap id="listBlogByTagIdMap" type="com.lyx.bean.Blog">
+        <id property="id" column="id"></id>
+        <result property="title" column="title"></result>
+        <result property="description" column="description"></result>
+        <result property="coverPicture" column="cover_picture"></result>
+        <result property="views" column="views"></result>
+        <result property="published" column="published"></result>
+        <result property="updateDate" column="update_date"></result>
+        <association property="type" javaType="com.lyx.bean.Type">
+            <result property="name" column="typeName"></result>
+        </association>
+        <association property="user" javaType="com.lyx.bean.User">
+            <result property="nickname" column="nickname"></result>
+            <result property="avatar" column="avatar"></result>
+        </association>
+        <collection property="tags" ofType="com.lyx.bean.Tag">
+            <result property="name" column="tagName"></result>
+        </collection>
+    </resultMap>
+    <select id="listBlogByTagId" resultMap="listBlogByTagIdMap">
+        select b.*, tp.name typeName, u.nickname nickname, u.avatar avatar, t.name tagName
+        from t_blog b
+                 join t_tag t
+                 join t_blog_tag
+                      ON b.id = t_blog_tag.blog_id and t.id = t_blog_tag.tag_id
+                 join t_user u
+                      on b.user_id = u.id
+                 join t_type tp
+                      on b.type_id = tp.id
+        where b.published = 1
+          and t.id = #{tagId}
+    </select>
+    <select id="listBlogCreateDate" resultType="java.lang.String">
+        select date_format(b.create_date, '%Y') 'year'
+        from t_blog b
+        group by year
+        order by year desc
+    </select>
+    <select id="listBlogByCreateDate" resultType="com.lyx.bean.Blog">
+        select b.id, b.title, b.create_date, b.flag
+        from t_blog b
+        where date_format(b.create_date, '%Y') = #{year}
+        order by b.create_date desc
+    </select>
+    <select id="getBlogCount" resultType="java.lang.Integer">
+        select count(*)
+        from t_blog
+    </select>
+    <select id="getBlogSumViews" resultType="java.lang.Integer">
+        select sum(views)
+        from t_blog
+    </select>
+    <select id="getBlogCommentCount" resultType="java.lang.Integer">
+        select count(*)
+        from t_comment
+    </select>
+    <select id="listBlogAllByOrder" resultType="com.lyx.bean.dto.BlogByOrder">
+        select b.id, b.title
+        from t_blog b
+        where b.published = 1
+        ORDER BY b.create_date desc
+    </select>
+</mapper>

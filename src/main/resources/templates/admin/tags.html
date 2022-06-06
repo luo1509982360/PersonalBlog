@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="_fragments :: header(~{::title})">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>标签管理</title>
+</head>
+<body>
+<!--导航-->
+<nav th:replace="_fragments :: adminNavBar(3)"></nav>
+
+<br>
+<br>
+
+<!--中间内容-->
+<div class="m-container-blog m-padded-tb-2">
+    <div class="container">
+        <div class="ui success message" th:unless="${#strings.isEmpty(message)}">
+            <i class="close icon"></i>
+            <div class="header">提示：</div>
+            <p th:text="${message}"></p>
+        </div>
+
+        <table class="ui compact orange table">
+            <thead>
+            <tr>
+                <th></th>
+                <th>标签名称</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="tag,iterState : ${page.list}">
+                <td th:text="${iterState.count}"></td>
+                <td th:text="${tag.name}"></td>
+                <td>
+                    <a th:href="@{/admin/updateTagPage/(id=${tag.id})}" class="ui mini blue button"><i
+                            class="edit outline icon"></i>编辑</a>
+                    <a th:href="@{/admin/deleteTag/(id=${tag.id})}" id="deleteType" class="ui mini red button"><i
+                            class="trash icon"></i>删除</a>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <th colspan="6">
+                    <div class="ui mini pagination menu">
+                        <a th:href="@{/admin/tags(pn=${page.pageNum}-1)}" class="icon item">上一页</a>
+                        <a th:href="@{/admin/tags(pn=${page.pageNum}+1)}" class="icon item">下一页</a>
+                    </div>
+
+                    <a th:href="@{/admin/saveTagPage}" class="ui mini right floated green button"><i
+                            class="plus square outline icon"></i>新增</a>
+                </th>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+<script>
+    $(".menu.toggle").click(function () {
+        $(".m-item").toggleClass("m-mobile-hide")
+    });
+
+    $(".ui.dropdown").dropdown()
+
+    $(".message .close").on("click", function () {
+        $(this).closest('.message').transition('fade');
+    })
+</script>
+</body>
+</html>

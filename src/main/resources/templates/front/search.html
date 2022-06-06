@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="_fragments :: header(~{::title})">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>搜索——L-toYthe-Xの博客</title>
+</head>
+<body>
+<!--导航-->
+<nav th:replace="_fragments :: frontNavBar(0)"></nav>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<!--中间内容-->
+<div class="m-container-blog m-padded-tb-2">
+    <div class="ui container">
+        <!--header-->
+        <div class="ui top attached segment">
+            <div class="ui middle aligned two column grid">
+                <div class="column">
+                    <h2 class="ui blue header m-inline-block">搜索结果</h2>
+                </div>
+                <div class="right aligned column">
+                    共 <h1 class="ui orange header m-inline-block" th:text="${page.total}"></h1> 个
+                </div>
+            </div>
+        </div>
+
+        <div class="ui top attached orange segment">
+            <div class="ui padded vertical segment m-padded-tb-1_5 m-padded-rl-1" th:each="blog : ${page.list}">
+                <div class="ui middle aligned mobile reversed stackable grid" >
+                    <div class="eleven wide column">
+                        <h2 class="ui header"><a th:href="@{/blog/(id=${blog.id})}" class="m-black" th:text="${blog.title}"></a></h2>
+                        <p class="m-text" th:text="${blog.description}"></p>
+                        <div class="ui grid">
+                            <div class="eleven wide column">
+                                <div class="ui horizontal link list">
+                                    <div class="item">
+                                        <img th:src="@{${blog.user.avatar}}" alt="" class="ui avatar image">
+                                        <div class="content">
+                                            <div class="header m-opacity-mini" th:text="${blog.user.nickname}"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="item">
+                                        <span><i class="calendar alternate outline icon"></i><span th:text="${blog.updateDateStr}"></span></span>
+                                    </div>
+
+                                    <div class="item">
+                                        <span><i class="eye icon"></i><span th:text="${blog.views}"></span></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="right aligned five wide column">
+                                <a href="#" target="_blank"
+                                   class="ui orange basic label m-padded-mini m-text-thin" th:text="${blog.type.name}">认知升级</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="five wide column">
+                        <a th:href="@{/blog/(id=${blog.id})}" target="_blank">
+                            <img th:src="@{${blog.coverPicture}}"
+                                 alt="" class="ui rounded image m-img">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ui bottom attached segment">
+            <div class="ui middle aligned three column grid">
+                <div class="column">
+                    <a th:href="@{/(pn=${page.pageNum}-1)}" class="ui blue basic button">上一页</a>
+                </div>
+                <div class="center aligned column" style="font-size: 20px; color: #ff8594">
+                    [[${page.pageNum}]]&nbsp;/&nbsp;[[${page.pages}]]
+                </div>
+                <div class="right aligned column">
+                    <a th:href="@{/(pn=${page.pageNum}+1)}" class="ui blue basic button">下一页</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<!--底部footer-->
+<!--<footer th:replace="_fragments :: footer"></footer>-->
+<footer th:fragment="footer" class="ui inverted verticla segment m-padded-tb-massive">
+    <div class="ui center aligned container">
+        <div class="ui inverted divided stackable grid">
+            <div class="three wide column">
+                <h3 class="ui inverted header m-text-spaced m-opacity-mini">联系我</h3>
+                <div class="ui inverted link list">
+                    <div class="item">Email：1509982360@qq.com</div>
+                    <div class="item">QQ：1509982360</div>
+                </div>
+            </div>
+            <div class="five wide column">
+                <h3 class="ui inverted header m-text-spaced m-opacity-mini">最新博客</h3>
+                <div class="ui inverted link list">
+                    <a th:href="@{/blog/(id=${blog.id})}" target="_blank" class="item" th:each="blog : ${newBlogs}"
+                       th:text="${blog.title}">标题</a>
+                </div>
+            </div>
+            <div class="five wide column">
+                <h3 class="ui inverted header m-text-spaced m-opacity-mini">碎碎念</h3>
+                <p class="m-text-spaced m-opacity-mini">
+                    欢迎光临本站，这是我的个人博客，记录本人的学习笔记、编程心得、生活点滴，只要我想记录分享的内容都会在本站出现。
+                    在不断学习和成长的道路上，希望与诸君共勉
+                </p>
+            </div>
+            <div class="three wide column">
+                <h3 class="ui inverted header m-text-spaced m-opacity-mini">博客信息</h3>
+                <div class="ui inverted link list">
+                    <div class="item">博客总数：<span style="color: #ff7272; font-size: 20px">[[${blogCount}]]</span>&nbsp;篇
+                    </div>
+                    <div class="item">访问总数：<span style="color: #ff7272; font-size: 20px">[[${blogSumViews}]]</span>&nbsp;次
+                    </div>
+                    <div class="item">留言总数：<span style="color: #ff7272; font-size: 20px">[[${blogCommentCount}]]</span>&nbsp;条
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ui inverted section divider"></div>
+        <p class="m-text-spaced m-opacity-mini">
+            Copyright © 2022 L-toYthe-X Design By L-toYthe-X
+        </p>
+        <br>
+        <div style="color: #f160a2;margin-top: -18px" class="ui inverted m-text-spaced">
+            我的博客已营业：<span id="run_time" class="item"></span> （≧0≦）
+        </div>
+    </div>
+</footer>
+
+<script>
+    $(".menu.toggle").click(function () {
+        $(".m-item").toggleClass("m-mobile-hide")
+    });
+
+    // 运行时间统计
+    function runTime() {
+        var d = new Date(), str = '';
+        BirthDay = new Date("May 25,2022");
+        today = new Date();
+        timeold = (today.getTime() - BirthDay.getTime());
+        sectimeold = timeold / 1000
+        secondsold = Math.floor(sectimeold);
+        msPerDay = 24 * 60 * 60 * 1000
+        msPerYear = 365 * 24 * 60 * 60 * 1000
+        e_daysold = timeold / msPerDay
+        e_yearsold = timeold / msPerYear
+        daysold = Math.floor(e_daysold);
+        yearsold = Math.floor(e_yearsold);
+        //str = yearsold + "年";
+        str += daysold + "天";
+        str += d.getHours() + '时';
+        str += d.getMinutes() + '分';
+        str += d.getSeconds() + '秒';
+        return str;
+    }
+
+    setInterval(function () {
+        $('#run_time').html(runTime())
+    }, 1000);
+</script>
+</body>
+</html>

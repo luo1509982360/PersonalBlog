@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="_fragments :: header(~{::title})">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>友人帐修改</title>
+</head>
+<body>
+<!--导航-->
+<nav th:replace="_fragments :: adminNavBar(2)"></nav>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<!--中间内容-->
+<div class="m-container-blog m-padded-tb-2">
+    <div class="container">
+        <form th:action="@{/admin/updateBlogroll}" method="post" class="ui form">
+            <input type="hidden" name="id" th:value="${blogroll.id}">
+            <div class="required field">
+                <div class="ui left labeled input">
+                    <label class="ui blue basic label">网站标题</label>
+                    <input type="text" name="blogTitle" placeholder="网站标题" th:value="${blogroll.blogTitle}">
+                </div>
+                <div class="ui left labeled input">
+                    <label class="ui blue basic label">网站地址</label>
+                    <input type="text" name="blogUrl" placeholder="网站地址" th:value="${blogroll.blogUrl}">
+                </div>
+                <div class="ui left labeled input">
+                    <label class="ui blue basic label">图片地址</label>
+                    <input type="text" name="blogImg" placeholder="图片地址" th:value="${blogroll.blogImg}">
+                </div>
+            </div>
+
+            <div class="ui negative message" th:unless="${#strings.isEmpty(message)}" th:text="${message}"></div>
+            <div class="ui error message"></div>
+
+            <div class="ui right aligned container">
+                <button type="button" class="ui button" onclick="window.history.go(-1)">返回</button>
+                <button class="ui red submit button">修改</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    $(".menu.toggle").click(function () {
+        $(".m-item").toggleClass("m-mobile-hide")
+    });
+
+    $(".ui.dropdown").dropdown()
+
+    $(".ui.form").form({
+        fields: {
+            blogTitle: {
+                identifier: "blogTitle",
+                rules: [{
+                    type: "empty",
+                    prompt: "请输网站标题"
+                }]
+            },
+            blogUrl: {
+                identifier: "blogUrl",
+                rules: [{
+                    type: "empty",
+                    prompt: "请输网站地址"
+                }]
+            },
+            blogImg: {
+                identifier: "blogImg",
+                rules: [{
+                    type: "empty",
+                    prompt: "请输图片地址"
+                }]
+            },
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyx.dao.BlogrollMapper">
+    <insert id="saveBlogroll">
+        insert into t_blogroll(blog_title, blog_url, blog_img)
+        values (#{blogTitle}, #{blogUrl}, #{blogImg})
+    </insert>
+    <update id="updateBlogroll">
+        update t_blogroll
+        set blog_title = #{blogTitle},
+            blog_url   = #{blogUrl},
+            blog_img   = #{blogImg}
+        where id = #{id}
+    </update>
+    <delete id="deleteBlogroll">
+        delete
+        from t_blogroll
+        where id = #{id}
+    </delete>
+
+    <select id="getBlogroll" resultType="com.lyx.bean.Blogroll">
+        select *
+        from t_blogroll
+        where id = #{id}
+    </select>
+    <select id="listBlogroll" resultType="com.lyx.bean.Blogroll">
+        select *
+        from t_blogroll
+    </select>
+</mapper>
