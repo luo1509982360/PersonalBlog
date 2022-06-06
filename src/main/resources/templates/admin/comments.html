@@ -28,7 +28,6 @@
                 <th>留言内容</th>
                 <th>留言者</th>
                 <th>留言时间</th>
-                <th>博客标题</th>
                 <th>操作</th>
             </tr>
             </thead>
@@ -38,7 +37,6 @@
                 <td th:text="${comment.content}"></td>
                 <td th:text="${comment.nickname}"></td>
                 <td th:text="${comment.createDateStr}"></td>
-                <td th:text="${comment.blog.title}"></td>
                 <td>
                     <a th:href="@{/admin/deleteComment/(id=${comment.id})}" class="ui mini red button"><i class="trash icon"></i>删除</a>
                 </td>

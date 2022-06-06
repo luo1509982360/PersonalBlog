@@ -74,7 +74,7 @@ class PersonalBlogApplicationTests {
 //        User user = userMapper.findByUsernameAndPassword("1", "1");
 //        List list = new ArrayList();
 //        System.out.println(list.get(1));
-        Class<User> clazz = User.class;
-        Method method = clazz.getMethod("method");
+//        Class<User> clazz = User.class;
+//        Method method = clazz.getMethod("method");
     }
 }

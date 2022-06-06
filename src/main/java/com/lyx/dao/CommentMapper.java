@@ -23,6 +23,8 @@ public interface CommentMapper {
 
     List<Comment> listComment();
 
+    List<Comment> listAllComment();
+
     //添加一个评论
     int saveComment(Comment comment);
 

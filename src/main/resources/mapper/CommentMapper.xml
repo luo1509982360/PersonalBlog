@@ -67,4 +67,9 @@
         where c.blog_id = -1
         order by c.create_date desc
     </select>
+    <select id="listAllComment" resultType="com.lyx.bean.Comment">
+        select *
+        from t_comment
+        order by create_date desc
+    </select>
 </mapper>

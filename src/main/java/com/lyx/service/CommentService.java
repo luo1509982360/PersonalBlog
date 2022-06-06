@@ -20,6 +20,8 @@ public interface CommentService {
 
     List<Comment> listComment();
 
+    List<Comment> listAllComment();
+
     int saveComment(Comment comment);
 
     int deleteCommentById(Integer id);

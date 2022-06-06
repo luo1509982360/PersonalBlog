@@ -30,7 +30,7 @@ public class CommentController {
     public String listComment(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model){
         PageHelper.startPage(pn, 5);
 
-        List<Comment> comments = commentService.listComment();
+        List<Comment> comments = commentService.listAllComment();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         for (int i = 0; i < comments.size(); i++) {
             comments.get(i).setCreateDateStr(sdf.format(comments.get(i).getCreateDate()));

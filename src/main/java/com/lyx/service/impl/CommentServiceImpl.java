@@ -45,6 +45,13 @@ public class CommentServiceImpl implements CommentService {
         return comments;
     }
 
+    @Override
+    public List<Comment> listAllComment() {
+        List<Comment> comments = commentMapper.listAllComment();
+
+        return comments;
+    }
+
     @Transactional
     @Override
     public int saveComment(Comment comment) {
