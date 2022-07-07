@@ -257,7 +257,7 @@
     <select id="listBlogByCreateDate" resultType="com.lyx.bean.Blog">
         select b.id, b.title, b.create_date, b.flag
         from t_blog b
-        where date_format(b.create_date, '%Y') = #{year}
+        where date_format(b.create_date, '%Y') = #{year} and b.published = 1
         order by b.create_date desc
     </select>
     <select id="getBlogCount" resultType="java.lang.Integer">

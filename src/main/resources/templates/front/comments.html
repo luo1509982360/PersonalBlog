@@ -72,13 +72,13 @@
                 <div class="ui bottom">
                     <div class="ui middle aligned three column grid">
                         <div class="column">
-                            <a th:href="@{/showCommentsPage/(pn=${page.pageNum}-1)}" class="ui mini blue basic button">上一页</a>
+                            <a th:href="@{/showComments/(pn=${page.pageNum}-1)}" class="ui mini blue basic button">上一页</a>
                         </div>
                         <div class="center aligned column" style="font-size: 17px; color: #ff8594">
                             [[${page.pageNum}]]&nbsp;/&nbsp;[[${page.pages}]]
                         </div>
                         <div class="right aligned column">
-                            <a th:href="@{/showCommentsPage/(pn=${page.pageNum}+1)}" class="ui mini blue basic button">下一页</a>
+                            <a th:href="@{/showComments/(pn=${page.pageNum}+1)}" class="ui mini blue basic button">下一页</a>
                         </div>
                     </div>
                 </div>
@@ -214,20 +214,6 @@
             console.log("校验失败")
         }
     })
-
-    // function postData() {
-    //     console.log("进来了")
-    //     $("#comment-container").load(/*[[@{/saveComment}]]*/"", {
-    //         "parentComment.id": $("[name='parentComment.id']").val(),
-    //         "blog.id": $("[name='blog.id']").val(),
-    //         "nickname": $("[name='nickname']").val(),
-    //         "email": $("[name='email']").val(),
-    //         "content": $("[name='content']").val()
-    //     }, function (responseTxt, statusTxt, xhr) {
-    //         $(window).scrollTo($('#comment-container'), 500);
-    //         clearContent();
-    //     });
-    // }
 
     // 清空留言区域
     function clearContent() {
